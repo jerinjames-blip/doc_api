@@ -2,17 +2,18 @@ const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
 
-app.use(express.json()); // To parse JSON bodies
+app.use(express.json());
+
+// ---------------- Test Route ---------------- //
+app.get('/', (req, res) => {
+  res.send('Proxy API is running!');
+});
 
 // ---------------- Routes ---------------- //
-
 // 1️⃣ User Login
 app.post('/userlogin', async (req, res) => {
   const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: "Email and password required" });
-  }
+  if (!email || !password) return res.status(400).json({ error: "Email and password required" });
 
   try {
     const response = await fetch('http://10.0.2.2:8060/trial_1/login', {
@@ -20,7 +21,6 @@ app.post('/userlogin', async (req, res) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
     });
-
     const data = await response.json();
     res.json(data);
   } catch (error) {
@@ -32,10 +32,7 @@ app.post('/userlogin', async (req, res) => {
 // 2️⃣ Appointments
 app.post('/appointments', async (req, res) => {
   const { doctors_id, office_id } = req.body;
-
-  if (!doctors_id || !office_id) {
-    return res.status(400).json({ error: "doctors_id and office_id required" });
-  }
+  if (!doctors_id || !office_id) return res.status(400).json({ error: "doctors_id and office_id required" });
 
   try {
     const response = await fetch('http://10.0.2.2:8060/trial_1/appoinements', {
@@ -43,7 +40,6 @@ app.post('/appointments', async (req, res) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ doctors_id, office_id })
     });
-
     const data = await response.json();
     res.json(data);
   } catch (error) {
@@ -55,10 +51,7 @@ app.post('/appointments', async (req, res) => {
 // 3️⃣ Patient History
 app.post('/patienthistory', async (req, res) => {
   const { op_number, consult_id } = req.body;
-
-  if (!op_number || !consult_id) {
-    return res.status(400).json({ error: "op_number and consult_id required" });
-  }
+  if (!op_number || !consult_id) return res.status(400).json({ error: "op_number and consult_id required" });
 
   try {
     const response = await fetch('http://10.0.2.2:8060/trial_1/patienthistory', {
@@ -66,7 +59,6 @@ app.post('/patienthistory', async (req, res) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ op_number, consult_id })
     });
-
     const data = await response.json();
     res.json(data);
   } catch (error) {
