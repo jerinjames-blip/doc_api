@@ -16,7 +16,7 @@ app.post('/userlogin', async (req, res) => {
     if (!email || !password) return res.status(400).json({ error: "Email and password required" });
 
     try {
-        const response = await fetch('http://c7d008d8cc4c.ngrok-free.app/trial_1/login', {
+        const response = await fetch('https://92a26b2b7683.ngrok-free.app/trial_1/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({ email, password }).toString()
@@ -35,7 +35,7 @@ app.post('/appointments', async (req, res) => {
     if (!doctors_id || !office_id) return res.status(400).json({ error: "doctors_id and office_id required" });
 
     try {
-        const response = await fetch('http://c7d008d8cc4c.ngrok-free.app/trial_1/appoinements', {
+        const response = await fetch('https://92a26b2b7683.ngrok-free.app/trial_1/appoinements', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ doctors_id, office_id })
@@ -54,7 +54,7 @@ app.post('/patienthistory', async (req, res) => {
     if (!op_number || !consult_id) return res.status(400).json({ error: "op_number and consult_id required" });
 
     try {
-        const response = await fetch('http://c7d008d8cc4c.ngrok-free.app/trial_1/patienthistory', {
+        const response = await fetch('https://92a26b2b7683.ngrok-free.app /trial_1/patienthistory', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ op_number, consult_id })
